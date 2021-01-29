@@ -2,7 +2,7 @@
 @section('title','Crear publicación')
 @section('breadcrumb')
 <li class="breadcrumb-item active">
-	<a href="{{route('posts.index')}}">Publicaciones</a>
+	<a href="{{route('posts.index')}}">Ventas</a>
 </li>
 <li class="breadcrumb-item active">@yield('title')</li>
 @endsection

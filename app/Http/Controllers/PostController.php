@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Category;
 use App\Post;
+use App\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
@@ -22,45 +23,28 @@ class PostController extends Controller
 
     public function create()
     {
-        $categories = Category::where('module',1)->orderBy('name','ASC')->pluck('name','id');
+        $productos = Product::get();
         return view('admin.posts.create',
-            compact('categories')
+            compact('productos')
         );
     }
     public function store(Request $request)
     {
         $request->validate([
             'name'=>'required|unique:posts|max:60',
-            'user_id'=>'required|integer',
-            'category_id'=>'required|integer',
-            'abstract'=>'required|max:500',
-            'body'=>'required',
-            'status'=>'required',
-            'image'=> [
-                'required',
-                'image',
-                'dimensions:min_width=1200,max_width=1200,min_height=490,max_height=490',
-                'mimes:jpeg,jpg,png'
-                ]
+            'cliente_id'=>'required|integer',
+            'productos_id'=>'required|integer',
 
         ]);
-        if ($request->hasFile('image')) {
-            $image = $request->file('image');
-            $nombre = time().$image->getClientOriginalName();
-            $ruta = public_path().'/images';
-            $image->move($ruta,$nombre);
-            $urlimage['url'] = '/images/'.$nombre;
-        }
+
         $post = new Post();
-        $post->user_id = e($request->user_id);
-        $post->category_id = e($request->category_id);
+        $post->cliente_id = e($request->cliente_id);
+        $post->productos_id = e($request->productos_id);
         $post->name = e($request->name);
         $post->slug = Str::slug($request->name);
-        $post->abstract = e($request->abstract);
-        $post->body = e($request->body);
-        $post->status = e($request->status);
+
         $post->save();
-        $post->image()->create($urlimage);
+
         return redirect()->route('posts.index')->with('info','Agregado correctamente');
 
     }

@@ -23,58 +23,35 @@ class ProductController extends Controller
 
     public function create()
     {
-        $tags = Tag::orderBy('name','ASC')->get();
 
         $subcategories = Subcategory::orderBy('name','ASC')->pluck('name','id');
-        return view('admin.products.create',
-            compact('subcategories','tags')
-        );
+        return view('admin.products.create',compact('subcategories'));
     }
     public function store(Request $request)
     {
         $request->validate([
             'user_id'=>'required',
-            'subcategory_id'=>'required',
             'name'=>'required|unique:products|max:60 ',
             'stock'=>'required',
             'actualPrice'=>'required|numeric',
-            'previousPrice'=>'required|numeric',
-            'discountRate'=>'required|numeric',
-            'shortDescription'=>'required',
             'longDescription'=>'required',
-            'state'=>'required',
-            'status'=>'required',
+
 
         ]);
-        $urlimages = [];
 
-        if ($request->hasFile('images')) {
-            $images = $request->file('images');
-            foreach ($images as $image){
-                $nombre = time().$image->getClientOriginalName();
-                $ruta = public_path().'/images';
-                $image->move($ruta,$nombre);
-                $urlimages[]['url'] = '/images/'.$nombre;
-            }
-
-        }
 
         $product = new Product();
         $product->user_id = e($request->user_id);
-        $product->subcategory_id = e($request->subcategory_id);
         $product->name = e($request->name);
         $product->slug = Str::slug($request->name);
         $product->stock = e($request->stock);
         $product->actualPrice = e($request->actualPrice);
-        $product->previousPrice = e($request->previousPrice);
-        $product->discountRate = e($request->discountRate);
-        $product->shortDescription = e($request->shortDescription);
+
         $product->longDescription = e($request->longDescription);
-        $product->state = e($request->state);
-        $product->status = e($request->status);
+
         $product->save();
-        $product->images()->createMany($urlimages);
-        $product->tags()->attach($request->get('tags'));
+
+
         return redirect()->route('products.index')->with('info','Agregado correctamente');
 
     }

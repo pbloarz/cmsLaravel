@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\ShoppingCart;
+use App\Cliente;
 use Illuminate\Http\Request;
 
-class ShoppingCartController extends Controller
+class ClienteController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -41,10 +41,10 @@ class ShoppingCartController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\ShoppingCart  $shoppingCart
+     * @param  \App\Cliente  $cliente
      * @return \Illuminate\Http\Response
      */
-    public function show(ShoppingCart $shoppingCart)
+    public function show(Cliente $cliente)
     {
         //
     }
@@ -52,10 +52,10 @@ class ShoppingCartController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\ShoppingCart  $shoppingCart
+     * @param  \App\Cliente  $cliente
      * @return \Illuminate\Http\Response
      */
-    public function edit(ShoppingCart $shoppingCart)
+    public function edit(Cliente $cliente)
     {
         //
     }
@@ -64,10 +64,10 @@ class ShoppingCartController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\ShoppingCart  $shoppingCart
+     * @param  \App\Cliente  $cliente
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, ShoppingCart $shoppingCart)
+    public function update(Request $request, Cliente $cliente)
     {
         //
     }
@@ -75,10 +75,10 @@ class ShoppingCartController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\ShoppingCart  $shoppingCart
+     * @param  \App\Cliente  $cliente
      * @return \Illuminate\Http\Response
      */
-    public function destroy(ShoppingCart $shoppingCart)
+    public function destroy(Cliente $cliente)
     {
         //
     }

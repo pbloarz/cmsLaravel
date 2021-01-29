@@ -26,18 +26,7 @@
                         Ekko Lightbox
                     </div>
                 </div>
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-sm-2">
-                            <div class="item">
-                                @foreach ($product->images as $image)
-                                  <img src="{{$image->url}}" class="img-fluid" alt="white sample">
-                                @endforeach
-                            </div>
-                        </div>
 
-                    </div>
-                </div>
             </div>
           <div id="slider" class="owl-carousel product-slider">
 

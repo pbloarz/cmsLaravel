@@ -10,10 +10,6 @@ namespace App\Http\ViewComposer;
  {
  public function  compose(View $view)
     {
-        $categorias = Category::with('subcategories','image')->get();
 
-        $view->with([
-            'categorias' => $categorias,
-        ]);
     }
 }

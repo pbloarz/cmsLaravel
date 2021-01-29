@@ -2,6 +2,7 @@
 
 namespace App;
 
+use http\Client;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -9,30 +10,19 @@ class Post extends Model
 {
     use SoftDeletes;
     protected $fillable = [
-        'user_id',
-        'category_id',
-        'name',
-        'slug',
-        'abstract',
-        'body',
-        'status',
+        'cliente_id','productos_id','name','slug'
 
     ];
     protected $dates = ['deleted_at'];
 
-    public function image() {
-        return $this->morphOne('App\image','imageable');
+
+    public function client(){
+        return $this->belongsTo(Client::class);
     }
-    public function category(){
-        return $this->belongsTo(Category::class);
-    }
-    public function user(){
+    public function productos(){
         return $this->belongsTo(User::class);
     }
-    public function comments(){
-        return $this->morphMany(Comment::class,'commentable')
-            ->whereNull('parent_id');
-    }
+
 
 
 }

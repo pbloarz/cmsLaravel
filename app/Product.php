@@ -9,27 +9,23 @@ class Product extends Model
 {
     use SoftDeletes;
     protected $fillable = [
-        'user_id', 'subcategory_id', 'name', 'slug', 'stock',
-        'quantity', 'actualPrice', 'previousPrice', 'discountRate',
-        'shortDescription', 'longDescription', 'state', 'status',
+        'user_id',
+        'subcategory_id',
+        'name',
+        'slug',
+        'stock',
+       'actualPrice',
+        'longDescription',
+
     ];
     protected $dates = ['deleted_at'];
 
-    public function images() {
-        return $this->morphMany('App\image','imageable');
-    }
-    public function subcategory(){
-        return $this->belongsTo(Subcategory::class);
-    }
-    public function tags(){
-        return $this->belongsToMany(Tag::class);
-    }
+
     public function user(){
         return $this->belongsTo(User::class);
     }
-    public function comments(){
-        return $this->morphMany(Comment::class,'commentable')
-            ->whereNull('parent_id');
+    public function post(){
+        return $this->hasMany(Post::class);
     }
 
 
